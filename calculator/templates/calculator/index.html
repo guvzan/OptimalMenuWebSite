@@ -1,0 +1,17 @@
+{% extends 'calculator/base.html' %}
+
+{% block content %}
+<h1>Product List</h1>
+{% for p in products %}
+    <p>{{ p.name }} -- {{ p.calories }} -- ({{ p.bilky }}, {{ p.zhury }}, {{ p.vuglevody }})</p>
+{% endfor %}
+<br>
+<h1>Результати</h1>
+{% for m in menues %}
+    <p>
+        {% for item in m %}
+            {{ item }}
+        {% endfor %}
+    </p>
+{% endfor %}
+{% endblock content %}
