@@ -5,30 +5,48 @@
     <form action="{% url 'calculator:results' %}" method="post">
         {% csrf_token %}
         <table class="settings-table">
+            <input class="start-button" type="submit" value="Згенерувати!"/>
             <tr>
                 <td><label for="genom_l">Кількість слотів: </label></td>
-                <td><input type="number" name="genom_l" id="genom_l" required/></td>
+                <td><input type="number" name="genom_l" id="genom_l" value="10" required/></td>
+                <td>Обмеження: 5 ≤ x ≤ 50</td>
             </tr>
             <tr>
                 <td><label for="pop_l">Кількість меню на покоління: </label></td>
-                <td><input type="number" name="pop_l" id="pop_l" required/></td>
+                <td><input type="number" name="pop_l" id="pop_l" value="50" required/></td>
+                <td>Обмеження: 5 ≤ x ≤ 250</td>
             </tr>
             <tr>
                 <td><label for="gener_l">Поколінь потрібно: </label></td>
-                <td><input type="number" name="gener_l" id="gener_l" required/></td>
+                <td><input type="number" name="gener_l" id="gener_l" value="50" required/></td>
+                <td>Обмеження: 10 ≤ x ≤ 1000</td>
             </tr>
             <tr>
-                <td><label for="target_c">Калорій потрібно: </label></td>
-                <td><input type="number" name="target_c" id="target_c" required/></td>
+                <td><label for="target_c"><b>Калорій потрібно: </b></label></td>
+                <td><input type="number" name="target_c" id="target_c" value="2000" required/></td>
+                <td>Обмеження: x > 1</td>
             </tr>
             <tr>
-                <td><label for="target_b">Співвідношення БЖВ: </label></td>
-                <td><input type="text" name="target_b" id="target_b" required/></td>
-                <td><input type="checkbox" name="use_bzu"/></td>
+                <td><label for="target_b"><b>Співвідношення БЖВ: </b></label></td>
+                <td><input type="text" name="target_b" id="target_b" value="90 60 250" required/></td>
+                <td><input type="checkbox" name="use_bzu" checked/></td>
             </tr>
         </table>
-        <input class="start-button" type="submit" value="Subscribe!"/>
     </form>
+
+    <div class="instruction-div">
+        <h3 align="center">ЯК КОРИСТУВАТИСЬ СЕРВІСОМ?</h3>
+        <p>
+            За допомогою нашого сервісу, ви можете отримати
+            меню на день, що міститиме приблизно стільки калорій,
+            скільки ви вкажете. За бажанням, при розрахунку меню,
+            можна враховувати бажане співвідношення Білків, Жирів та Вуглеводів (БЖВ).
+            Якщо ви отримали результат, що не задовільняє ваш запит,
+            спробуйте збільшити <b>Кількість поколінь</b> та/або <b>Кількість меню
+            на покоління</b>, але доведеться трошки довше почекати :)
+        </p>
+    </div>
+
 </div>
 
 {% endblock content %}

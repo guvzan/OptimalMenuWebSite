@@ -1,3 +1,7 @@
+body{
+    background-color: #F0FFB1;
+}
+
 header{
     color: #2D1644;
     background-color: #BAFF9C;
@@ -8,20 +12,63 @@ header{
     padding-top: 0.1em;
 }
 
+a:link{
+    color: green;
+    text-decoration: none;
+}
+
+a:visited{
+    color: green;
+    text-decoration: none;
+}
+
+a:hover{
+    color: #DE2852;
+    text-decoration: none;
+}
+
+a:active{
+    color: green;
+    text-decoration: none;
+}
+
+
 .start-div{
     text-align: center;
 }
 
-.start-bultton{
-    margin-top: 5em;
-    width: 20em;
-    height: 10em;
-    border: 1em black solid;
-    border-radius: 5em;
+.start-button{
+    margin-top: 2em;
+    width: 15em;
+    height: 4em;
+    border: 0.1em black solid;
+    border-radius: 0.2em;
+    font-size: 16px;
+    background-color: #BAFF9C;
+}
+
+.start-button:hover{
+    background-color: transparent;
+    cursor: pointer;
+    transform: scale(1.01, 1.01)
+}
+
+.start-button:active{
+    background-color: transparent;
+    cursor: pointer;
+    transform: scale(0.99, 0.99)
 }
 
 .settings-table{
+    border: 0.01em solid black;
     text-align: left;
-    margin-left: 50%;
-    margil-right: 50%;
+    margin: 0 auto;
+    margin-top: 2em;
+}
+
+.instruction-div{
+    width: 34.7em;
+    text-align: justify;
+    margin: 0 auto;
+    margin-top: 2em;
 }

@@ -9,6 +9,10 @@ class Genetic:
     GENERATIONS_NEEDED = 500
     TARGET_CALORIES = 1500
     TARGET_BZU = [20, 40, 20]
+    USE_BZU = False
+
+    def use_bzu(self, use_bzu):
+        self.USE_BZU = use_bzu
 
     def set_settings(self, gl, pl, cch, mch, gn, tc, tbzu):
         self.GENOM_LENGTH = gl
@@ -97,7 +101,7 @@ class Genetic:
 
     class Population:
         def __init__(self, all_products, genome_length, population_length, crossing_chance, mutation_chance,
-                     target_calories, target_bzu, menu_class):
+                     target_calories, target_bzu, menu_class, use_bzu):
             self.GENOME_LENGTH = genome_length
             self.POPULATION_LENGTH = population_length
             self.CROSSING_CHANCE = crossing_chance
@@ -105,6 +109,7 @@ class Genetic:
             self.TARGET_CALORIES = target_calories
             self.TARGET_BZU = target_bzu
             self.Menu = menu_class
+            self.use_bzu = use_bzu
             self.menues = [self.Menu(all_products, self.GENOME_LENGTH) for _ in range(self.POPULATION_LENGTH)]
             self.all_products = all_products
 
@@ -128,10 +133,10 @@ class Genetic:
                     m1, m2, m3 = r.randint(0, self.POPULATION_LENGTH - 1), r.randint(0, self.POPULATION_LENGTH - 1), r.randint(0,
                                                                                                                      self.POPULATION_LENGTH - 1)
                 # maximum = max(self.menues[m1], self.menues[m2], self.menues[m3], key=lambda x: x.count_calories()) # Поки що шукаємо максимум
-                if None:
+                if self.use_bzu:
                     maximum = self.tournament_rule_2(self.menues[m1], self.menues[m2], self.menues[m3], self.TARGET_CALORIES, self.TARGET_BZU)
                 else:
-                    maximum = self.tournament_rule_1(self.menues[m1], self.menues[m2], self.menues[m3], TARGET_CALORIES)
+                    maximum = self.tournament_rule_1(self.menues[m1], self.menues[m2], self.menues[m3], self.TARGET_CALORIES)
                 best.append(c.deepcopy(maximum))
             self.menues = best
 
@@ -175,7 +180,7 @@ class Genetic:
         pop = self.Population(products, self.GENOM_LENGTH, self.POPULATION_LENGTH,
                               self.CROSSING_CHANCE, self.MUTATION_CHANCE,
                               self.TARGET_CALORIES, self.TARGET_BZU,
-                              self.Menu)  # Стартова популяція
+                              self.Menu, self.USE_BZU)  # Стартова популяція
         pop.show_population()
         list_ = []
         for i in range(self.GENERATIONS_NEEDED):
@@ -196,7 +201,8 @@ class Genetic:
                 unique_list.append(elem)
                 unique_genome_list.append(elem.get_genome())
         return unique_list, [self.GENOM_LENGTH, self.POPULATION_LENGTH, self.CROSSING_CHANCE,
-                             self.MUTATION_CHANCE, self.TARGET_CALORIES, self.TARGET_BZU]
+                             self.MUTATION_CHANCE, self.POPULATION_LENGTH,
+                             self.TARGET_CALORIES, self.TARGET_BZU]
 
 
 
