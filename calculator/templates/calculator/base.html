@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'calculator/css/style.css' %}" />
 </head>
 <body>
+<header>
+    <h1>
+        <a href="{% url 'calculator:main' %}">КАЛЬКУЛЯТОР МЕНЮ</a>
+    </h1>
+</header>
 {% block content %}
 {% endblock content %}
 </body>

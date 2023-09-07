@@ -89,6 +89,9 @@ class Genetic:
                 self.bzu_points[0] += product.bilky
                 self.bzu_points[1] += product.zhury
                 self.bzu_points[2] += product.vuglevody
+                round(self.bzu_points[0], 1)
+                round(self.bzu_points[1], 1)
+                round(self.bzu_points[2], 1)
             return self.bzu_points
 
 
@@ -125,8 +128,10 @@ class Genetic:
                     m1, m2, m3 = r.randint(0, self.POPULATION_LENGTH - 1), r.randint(0, self.POPULATION_LENGTH - 1), r.randint(0,
                                                                                                                      self.POPULATION_LENGTH - 1)
                 # maximum = max(self.menues[m1], self.menues[m2], self.menues[m3], key=lambda x: x.count_calories()) # Поки що шукаємо максимум
-                # maximum = self.tournament_rule_1(self.menues[m1], self.menues[m2], self.menues[m3], TARGET_CALORIES)
-                maximum = self.tournament_rule_2(self.menues[m1], self.menues[m2], self.menues[m3], self.TARGET_CALORIES, self.TARGET_BZU)
+                if None:
+                    maximum = self.tournament_rule_2(self.menues[m1], self.menues[m2], self.menues[m3], self.TARGET_CALORIES, self.TARGET_BZU)
+                else:
+                    maximum = self.tournament_rule_1(self.menues[m1], self.menues[m2], self.menues[m3], TARGET_CALORIES)
                 best.append(c.deepcopy(maximum))
             self.menues = best
 
@@ -178,7 +183,7 @@ class Genetic:
             pop.tournament()
             pop.crossover()
             pop.mutation()
-            pop.show_population()
+            # pop.show_population()
             list_.append(pop.show_best(self.TARGET_CALORIES))
         return list_
 
@@ -190,13 +195,14 @@ class Genetic:
             if elem.get_genome() not in unique_genome_list:
                 unique_list.append(elem)
                 unique_genome_list.append(elem.get_genome())
-        return unique_list
+        return unique_list, [self.GENOM_LENGTH, self.POPULATION_LENGTH, self.CROSSING_CHANCE,
+                             self.MUTATION_CHANCE, self.TARGET_CALORIES, self.TARGET_BZU]
 
 
 
 if __name__ == "__main__":
     results = run_simulation(all_products)
     unique_results = show_unique_results(results)
-    print()
-    for i in unique_results:
-        print(i.calories, i.get_genome(), round(i.fitness_points, 0))
+    # print()
+    # for i in unique_results:
+    #     print(i.calories, i.get_genome(), round(i.fitness_points, 0))

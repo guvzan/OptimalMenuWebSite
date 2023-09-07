@@ -1,0 +1,27 @@
+header{
+    color: #2D1644;
+    background-color: #BAFF9C;
+    margin: -8px -8px 0px -8px;
+    height: 5em;
+    text-align: center;
+    vertical-align: bot;
+    padding-top: 0.1em;
+}
+
+.start-div{
+    text-align: center;
+}
+
+.start-bultton{
+    margin-top: 5em;
+    width: 20em;
+    height: 10em;
+    border: 1em black solid;
+    border-radius: 5em;
+}
+
+.settings-table{
+    text-align: left;
+    margin-left: 50%;
+    margil-right: 50%;
+}
