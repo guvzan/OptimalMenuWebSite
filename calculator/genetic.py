@@ -154,7 +154,7 @@ class Genetic:
                 menu.fitness_points = 0
                 menu.fitness_points += abs(100 - c * 100 / target_calories)
                 for i in range(3):
-                    menu.fitness_points += abs(100 - b[i] * 100 / target_bzu[i])
+                    menu.fitness_points += abs(20 - b[i] * 20 / target_bzu[i])
             return min(m1, m2, m3, key=lambda x: x.fitness_points)
 
 
