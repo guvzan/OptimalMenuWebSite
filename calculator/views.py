@@ -4,6 +4,7 @@ from .genetic import Genetic
 from .models import Product
 
 
+
 def main_page(request):
     """
     Головна сторінка.
@@ -44,9 +45,23 @@ def get_results(request):
         )
 
     menues, settings = get_menues(gen)
+    calories = [menu[0] for menu in menues]
+    bzu = [menu[1] for menu in menues]
+    genome = [menu[2] for menu in menues]
+    zipped = zip(calories, bzu, genome)
+
+    header_string = ''
+    if gen.USE_BZU == True:
+        header_string = f'Результати для {settings[-2]} калорій та {settings[-1][0]}, {settings[-1][1]}, {settings[-1][2]} БЖВ'
+    else:
+        header_string = f'Результати для {settings[-2]} калорій'
+
     context = {
+        'zipped': zipped,
         'menues': menues,
-        'settings': settings
+        'calories': settings[-2],
+        'bzu': settings[-1],
+        'header_string': header_string
     }
     return render(request, 'calculator/results.html', context)
 
@@ -82,5 +97,21 @@ def validate_gen_settings(dict_):
     else:
         dict_['target_b'] = [90, 60, 250]
     return dict_
+
+def add_products_from_file(file):
+    with open(file, 'r') as f:
+        lines = f.readlines()
+        for i in range(len(lines)):
+            if 'blank' in lines[i]:
+                continue
+            line = lines[i].split('@')
+            product = Product(
+                name = line[0],
+                calories = line[1],
+                bilky = line[2],
+                zhury = line[4],
+                vuglevody = line[3]
+            )
+            product.save()
 
 
