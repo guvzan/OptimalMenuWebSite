@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from .genetic import Genetic
-from .models import Product
+from .models import Product, ApprovedMenu
 
 
 
@@ -45,10 +45,16 @@ def get_results(request):
         )
 
     menues, settings = get_menues(gen)
-    calories = [menu[0] for menu in menues]
+    calories = [int(menu[0]) for menu in menues]
+    str_calories = [str(i) for i in calories]
     bzu = [menu[1] for menu in menues]
+    for i in range(len(bzu)):
+        for j in range(len(bzu[0])):
+            bzu[i][j] = int(bzu[i][j])
+    str_bzu = [''.join(str(i)) for i in bzu]
     genome = [menu[2] for menu in menues]
-    zipped = zip(calories, bzu, genome)
+    str_genome = [''.join(str(i)) for i in genome]
+    zipped = zip(calories, bzu, genome, str_calories, str_bzu, str_genome)
 
     header_string = ''
     if gen.USE_BZU == True:
@@ -115,3 +121,15 @@ def add_products_from_file(file):
             product.save()
 
 
+
+def add_approved_menu(request, calories, bzu, genome):
+    new_record = ApprovedMenu(calories=calories, bzu=bzu, menu=genome)
+    new_record.save()
+    return redirect('calculator:approved_menues')
+
+def show_approved_menues(request):
+    menues = ApprovedMenu.objects.all().order_by('calories')
+    context = {
+        'menues': menues,
+    }
+    return render(request, 'calculator/approved_menues.html', context)

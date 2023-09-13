@@ -8,11 +8,11 @@
 <div>
     <table class="results-table">
         <tr>
-            <th>CALORIES</th>
-            <th>BZU</th>
-            <th>MENU</th>
+            <th>КАЛОРІЇ</th>
+            <th>БЖВ</th>
+            <th>МЕНЮ</th>
         </tr>
-        {% for calories, bzu, genome in zipped %}
+        {% for calories, bzu, genome, s_c, s_b, s_g in zipped %}
             <tr>
                 <td class="calories-col">{{ calories }}</td>
                 <td class="bzu-col">
@@ -24,6 +24,12 @@
                     {% for item in genome %}
                         <li>{{ item }}</li>
                     {% endfor %}
+                </td>
+                <td class="button-col">
+                    <form action="{% url 'calculator:add_approved_menu' s_c s_b s_g %}" method="post">
+                        {% csrf_token %}
+                        <input class="approve-button" type="submit" value="Одобрити"/>
+                    </form>
                 </td>
             </tr>
         {% endfor %}

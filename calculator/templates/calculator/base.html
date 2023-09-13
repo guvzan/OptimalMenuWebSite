@@ -8,9 +8,13 @@
 </head>
 <body>
 <header>
-    <h1>
+    <h1 align="center">
         <a href="{% url 'calculator:main' %}">КАЛЬКУЛЯТОР МЕНЮ</a>
+        |
+        <a href="{% url 'calculator:approved_menues' %}">ГОТОВІ МЕНЮ</a>
     </h1>
+
+
 </header>
 {% block content %}
 {% endblock content %}

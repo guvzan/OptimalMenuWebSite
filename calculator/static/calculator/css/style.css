@@ -99,3 +99,36 @@ tr{
 .genome-col{
     width: 35%;
 }
+
+.button-col{
+    width: 20%;
+}
+
+.approve-button{
+    margin-top: 2em;
+    width: 6em;
+    height: 2em;
+    border: 0.1em black solid;
+    border-radius: 0.2em;
+    font-size: 16px;
+    background-color: #BAFF9C;
+    margin-top: auto;
+    margin-bot: auto;
+}
+
+.approve-button:hover{
+    background-color: transparent;
+    cursor: pointer;
+    transform: scale(1.01, 1.01)
+}
+
+.approve-button:active{
+    background-color: transparent;
+    cursor: pointer;
+    transform: scale(0.99, 0.99)
+}
+
+.url-to-approved{
+    margin: 0 auto;
+}
+
