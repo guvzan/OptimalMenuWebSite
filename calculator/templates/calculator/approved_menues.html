@@ -1,0 +1,33 @@
+{% extends 'calculator/base.html' %}
+
+{% block content %}
+    <h1 align="center">ГОТОВІ МЕНЮ</h1>
+    <table class="results-table">
+        <tr>
+            <th>КАЛОРІЇ</th>
+            <th>БЖВ</th>
+            <th>МЕНЮ</th>
+        </tr>
+        {% for menu in menues %}
+            <tr>
+                <td class="calories-col">{{ menu.get_calories }}</td>
+                <td class="bzu-col">
+                    <ul>
+                        {% for m in menu.get_bzu %}
+                            <li>{{ m }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td class="genome-col">
+                    <ul>
+                        {% for m in menu.get_menu %}
+                            <li>{{ m }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+{% endblock content %}
